@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% if title %}
+    <title>
+        Sindetis Tribune-{{title}}
+    </title>
+    {% else %}
+    <title>Sindetis Tribune</title>
+    {% end if %}
+</head>
+<body>
+    {% block content %}<h1>News for {{date|date:"l d-F Y"}</h1>
+    {% endblock %}
+    
+</body>
+</html>

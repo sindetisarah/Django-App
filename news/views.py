@@ -1,29 +1,20 @@
 from django.http.response import Http404
-from django.shortcuts import render
+from django.shortcuts import redirect, render, redirect
 from django.http import HttpResponse
 import datetime as dt
 
 # Create your views here.
 def welcome(request):
-    return HttpResponse("Hello welcome to my Website")
+    return render(request,  'welcome.html')
 def news_of_day(request):
     date=dt.date.today()
     #calling the convert day function
-    day=convert_dates(date)
-    html=f'''
-        <html>
-        <body>
-        <h1>News for {day} {date.day}-{date.month}-{date.year}</h1></body>
-        </html>
-
-
-    '''
-    return HttpResponse(html)
+    return render(request, 'all_news/today_news',{"date": date,})
     # //getting the day of the week
     
 def convert_dates(dates):
     day_number=dt.date.weekday(dates)
-    days=['Monday','Tuesday','Wednesday','Thursday','Friday']
+    days=['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday']
     #returning the actual days of the week
     day=days[day_number]
     return day
@@ -34,3 +25,7 @@ def past_days_news(request,past_date):
         date=dt.datetime.strptime(past_date,'%Y-%m-%d').date()
     except ValueError:
         raise Http404()
+        assert False
+    if date==dt.date.today():
+        return redirect(news_of_day)
+    return render(request,  'all_news/past_news',{"date":date})
