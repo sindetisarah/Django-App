@@ -1,5 +1,5 @@
 from django.http.response import Http404
-from django.shortcuts import redirect, render, redirect
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 import datetime as dt
 
