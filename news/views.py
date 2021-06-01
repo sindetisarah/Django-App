@@ -9,7 +9,7 @@ def welcome(request):
 def news_of_day(request):
     date=dt.date.today()
     #calling the convert day function
-    return render(request, 'all_news/today_news',{"date": date,})
+    return render(request, 'all_news/today_news.html',{"date": date,})
     # //getting the day of the week
     
 def convert_dates(dates):
@@ -28,4 +28,4 @@ def past_days_news(request,past_date):
         assert False
     if date==dt.date.today():
         return redirect(news_of_day)
-    return render(request,  'all_news/past_news',{"date":date})
+    return render(request,  'all_news/past_news.html',{"date":date})
